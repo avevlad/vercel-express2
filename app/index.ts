@@ -14,12 +14,12 @@ function build() {
   app.get<{ Querystring: IQuerystring }>('/', async (req, res) => {
     const { name = 'World' } = req.query;
     // req.log.info({ name }, 'hello world!');
-    return `Hello ${name}!`;
+    return `Hello TS ${name}!`;
   });
   app.get<{ Querystring: IQuerystring }>('/another/kek', async (req, res) => {
     const { name = 'World' } = req.query;
     // req.log.info({ name }, 'hello world!');
-    return `Hello ${name}!`;
+    return `Hello TS ${name}!`;
   });
 
   return app;
