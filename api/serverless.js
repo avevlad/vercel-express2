@@ -1,6 +1,6 @@
 'use strict';
 
-const build = require('./index');
+const build = require('../app/index');
 
 const app = build();
 

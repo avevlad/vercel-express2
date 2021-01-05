@@ -1,24 +1,24 @@
-// const app = require('express')();
-const app = require('fastify')();
-const { v4 } = require('uuid');
+'use strict';
 
-// app.get('/api', (req, res) => {
-//   const path = `/api/item/${v4()}`;
-//   res.setHeader('Content-Type', 'text/html');
-//   res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-//   res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
-// });
+const fastify = require('fastify');
 
-app.get('/api', (request, reply) => {
-  const path = `/api/item/${v4()}`;
-  reply.send(`Hello! Go to item: <a href="${path}">${path}</a>`);
-});
-app.get('/api/item/:slug', (request, reply) => {
-  reply.send(`Hello! slug`);
-});
-// app.get('/api/item/:slug', (req, res) => {
-//   const { slug } = req.params;
-//   res.end(`Item: ${slug}`);
-// });
+function build() {
+  const app = fastify({
+    logger: true
+  });
 
-module.exports = app;
+  app.get('/', async (req, res) => {
+    const { name = 'World' } = req.query;
+    req.log.info({ name }, 'hello world!');
+    return `Hello ${name}!`;
+  });
+  app.get('/another/kek', async (req, res) => {
+    const { name = 'World' } = req.query;
+    req.log.info({ name }, 'hello world!');
+    return `Hello ${name}!`;
+  });
+
+  return app;
+}
+
+module.exports = build;
